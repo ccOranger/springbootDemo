@@ -1,0 +1,56 @@
+server:
+   port: 8099
+
+hello:
+  name: 你好
+
+
+# swagger开关
+swagger:
+  enabled:  true
+  info:
+    basePackage: com.example.ldemo.controller
+    title: 发布控制服务
+    desc: 发布控制服务
+    termsOfServiceUrl: http://127.0.0.1:${server.port}/
+    version: 1.0
+    contact:
+        name: 发布控制服务
+        url: http://127.0.0.1:${server.port}/swagger-ui.html
+        email:
+
+
+# JDBC 配置(驱动类自动从url的mysql识别,数据源类型自动识别)
+spring:
+    datasource:
+            url: jdbc:mysql://127.0.0.1:3306/springboot_test?useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT
+            username: root
+            password: 123456
+            driver-class-name: com.mysql.jdbc.Driver
+    # redis
+    redis: #redis配置
+        host: 192.168.10.14
+        port: 37701
+        password:
+        timeout: 10000
+        maxIdle: 300
+        maxTotal: 1000
+        maxWaitMillis: 1000
+        minEvictableIdleTimeMillis: 300000
+        numTestsPerEvictionRun: 1024
+        timeBetweenEvictionRunsMillis: 30000
+        testOnBorrow: true
+        testWhileIdle: true
+
+
+mybatis:
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml
+
+# 打印日志
+logging:
+  level:
+     com.example.ldemo: trace
+  config:
+    classpath: log4j2-dev.xml
+
+

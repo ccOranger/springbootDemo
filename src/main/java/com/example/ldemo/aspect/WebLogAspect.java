@@ -45,6 +45,18 @@ public class WebLogAspect {
      *使用@AfterThrowing用来处理当切入内容部分抛出异常之后的处理逻辑
      */
 
+
+    /***
+     * 同步问题，所以我们可以引入ThreadLocal对象
+     * Thread 为每一个线程都维护了ThreadLocalMap，这个map。
+     * ThreadLocalMap是在ThreadLocal中使用内部类编写的，但引用对象在Thread中
+     * ThreadLocalMap的key是ThreadLocal对象，value是要存储的对象
+     *
+     * ThreadLocal设计目的是为了能够在当前线程中有属于自己的变量，并不是为了解决并发或者共享变量的问题
+     *
+     *
+     *
+     */
     ThreadLocal<Long> startTime = new ThreadLocal<>();
 
 

@@ -30,7 +30,7 @@ public class HelloService {
     @Autowired
     HelloMapper helloMapper;
 
-    public String getHello(){
+    public String getHello(String name){
         logger.debug("hahahh");
 
       Map map =  helloMapper.findByUserName(11);

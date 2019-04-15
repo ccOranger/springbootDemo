@@ -35,7 +35,15 @@ public class HelloController {
 
     @ApiOperation(value = "测试专用", notes = "测试专用")
     @GetMapping(value = "/get")
-    public String getHello(){
-        return  helloService.getHello();
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name",value = "名字",paramType = "string")
+    })
+    public String getHello(String name){
+        return  helloService.getHello(name);
+    }
+    @ApiOperation(value = "aop测试", notes = "aop测试")
+    @GetMapping(value = "/getAop")
+    public String getAop(){
+        return  "aop测试";
     }
 }

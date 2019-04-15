@@ -23,10 +23,42 @@ swagger:
 # JDBC 配置(驱动类自动从url的mysql识别,数据源类型自动识别)
 spring:
     datasource:
+        druid:
             url: jdbc:mysql://127.0.0.1:3306/springboot_test?useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT
             username: root
             password: 123456
             driver-class-name: com.mysql.jdbc.Driver
+            initial-size: 1
+            max-active: 20
+            min-idle: 1
+            max-wait: 60000
+            pool-prepared-statements: false
+            max-pool-prepared-statement-per-connection-size: 20
+            validation-query: SELECT 'x'
+            test-on-borrow: false
+            test-on-return: false
+            test-while-idle: true
+            time-between-eviction-runs-millis: 60000
+            min-evictable-idle-time-millis: 300000
+            filters: stat
+            web-stat-filter:
+                enabled: true
+                url-pattern: /*
+                exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+                session-stat-enable: false
+                session-stat-max-count: 1000
+                principal-session-name: admin
+                principal-cookie-name: admin
+                profile-enable: true
+            stat-view-servlet:
+                enabled: true
+                url-pattern: /druid/*
+                reset-enable: true
+                login-username: admin
+                login-password: admin
+                allow:
+                deny:
+            aop-patterns: com.example.ldemo.service.*
     # redis
     redis: #redis配置
         host: 192.168.10.14
@@ -52,5 +84,4 @@ logging:
      com.example.ldemo: trace
   config:
     classpath: log4j2-dev.xml
-
 

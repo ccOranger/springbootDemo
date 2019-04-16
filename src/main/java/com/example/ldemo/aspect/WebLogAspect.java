@@ -89,6 +89,10 @@ public class WebLogAspect {
 
         logger.info("SPEND TIME : " + (System.currentTimeMillis() - startTime.get()) +" ms");
 
+
+        //防止内存泄露，对象使用完，删除
+        startTime.remove();
+
     }
 
 }

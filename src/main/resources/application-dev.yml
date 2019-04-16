@@ -85,3 +85,10 @@ logging:
   config:
     classpath: log4j2-dev.xml
 
+# 线程池配置
+task:
+    pool:
+      corePoolSize: 20
+      maxPoolSize: 40
+      keepAliveSeconds: 300
+      queueCapacity: 50

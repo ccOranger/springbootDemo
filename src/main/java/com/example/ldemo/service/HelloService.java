@@ -27,6 +27,7 @@ public class HelloService {
     private String name;
 
     private static Logger logger = LoggerFactory.getLogger(HelloService.class);
+
     @Autowired
     HelloMapper helloMapper;
 

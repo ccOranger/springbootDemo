@@ -27,19 +27,26 @@ import java.util.List;
 public class RemarksCommentGenerator extends DefaultCommentGenerator {
     @Override
     public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        topLevelClass.addJavaDocLine("import io.swagger.annotations.ApiModel;");
+        topLevelClass.addJavaDocLine("import io.swagger.annotations.ApiModelProperty;");
+
         topLevelClass.addJavaDocLine("/**");
         topLevelClass.addJavaDocLine(" * 实体名称 "+introspectedTable.getFullyQualifiedTable());
         topLevelClass.addJavaDocLine(" * @projectName: iot-platform");
         topLevelClass.addJavaDocLine(" * @package: com.rayeye.iot.persist.vo");
         topLevelClass.addJavaDocLine(" * @className: ${TYPE_NAME}");
         topLevelClass.addJavaDocLine(" * @description: Describes the function of the class");
-        topLevelClass.addJavaDocLine(" * @author: Neil.Zhou");
+        topLevelClass.addJavaDocLine(" * @author: 李臣臣");
         topLevelClass.addJavaDocLine(" * @createDate: "+new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        topLevelClass.addJavaDocLine(" * @updateUser: Neil.Zhou");
+        topLevelClass.addJavaDocLine(" * @updateUser: 李臣臣");
         topLevelClass.addJavaDocLine(" * @updateRemark: The modified content");
         topLevelClass.addJavaDocLine(" * @version: 1.0");
         topLevelClass.addJavaDocLine(" * <p>Copyright: Copyright (c) 2018</p>");
         topLevelClass.addJavaDocLine(" */");
+
+
+        topLevelClass.addJavaDocLine("@ApiModel(value = \""+introspectedTable.getFullyQualifiedTable().getDomainObjectName()+"\",description = \""+introspectedTable.getFullyQualifiedTable().getDomainObjectName()+"\")");
+
     }
 
     @Override
@@ -59,5 +66,8 @@ public class RemarksCommentGenerator extends DefaultCommentGenerator {
         String defaultValue = introspectedColumn.getDefaultValue();
         remark += null != defaultValue ? "  (默认值为: "+defaultValue+")" : " (无默认值)";
         field.addJavaDocLine("/** "+ remark+" */");
+
+        field.addJavaDocLine("@ApiModelProperty(value =  \""+introspectedColumn.getRemarks()+"\", name = \""+columnName+"\", example =\""+defaultValue+"\")");
+
     }
 }

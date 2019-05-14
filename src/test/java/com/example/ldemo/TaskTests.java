@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -40,4 +42,9 @@ public class TaskTests {
         logger.info("All tasks finished.");
     }
 
+    @Test
+    public  void  testMap(){
+        Map map = new ConcurrentHashMap<>();
+
+    }
 }

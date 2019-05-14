@@ -44,8 +44,13 @@ public class HelloTests {
 
 		CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList(new ArrayList<>());
 		List<String> list= Collections.synchronizedList(Lists.newArrayList());
+List alist = new ArrayList<>();
+		List llist = new LinkedList<>();
 
+		Set bs  = new HashSet();
+		Map ss = new TreeMap();
 
+		Set sss = new TreeSet<>();
 
 	}
 

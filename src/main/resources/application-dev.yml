@@ -60,19 +60,10 @@ spring:
                 deny:
             aop-patterns: com.example.ldemo.service.*
     # redis
-    redis: #redis配置
-        host: 192.168.10.14
-        port: 37701
-        password:
-        timeout: 10000
-        maxIdle: 300
-        maxTotal: 1000
-        maxWaitMillis: 1000
-        minEvictableIdleTimeMillis: 300000
-        numTestsPerEvictionRun: 1024
-        timeBetweenEvictionRunsMillis: 30000
-        testOnBorrow: true
-        testWhileIdle: true
+    redis:
+       cache:
+          clusterNodes: 47.101.11.64:7001,47.101.11.64:7002,47.101.11.64:7003,47.101.11.64:7004,47.101.11.64:7005,47.101.11.64:7006
+          commandTimeout: 5000
 
 
 mybatis:

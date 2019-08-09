@@ -2,8 +2,12 @@ package com.example.ldemo.controller;
 
 import com.example.ldemo.entity.RequestMessage;
 import com.example.ldemo.entity.ResponseMessage;
+import com.example.ldemo.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -21,12 +25,37 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class WebSocketController {
+    @Autowired
+    private SimpMessagingTemplate template;
 
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public ResponseMessage say(RequestMessage message) {
         System.out.println(message.getName());
         return new ResponseMessage("welcome," + message.getName() + " !");
+    }
+
+
+    //广播推送消息
+    @Scheduled(fixedRate = 10000)
+    public void sendTopicMessage() {
+        System.out.println("后台广播推送！");
+        template.convertAndSend("/topic/greetings", "掌声");
+        for (int i=1;i<4;i++){
+            template.convertAndSend("/topic/greetings", "后台广播推送"+i);
+        }
+    }
+
+    //一对一推送消息
+    @Scheduled(fixedRate = 10000)
+    public void sendQueueMessage() {
+        System.out.println("后台一对一推送！");
+        for (int i=1;i<4;i++){
+            User user=new User();
+            user.setId((long) i);
+            user.setUserName("后台一对一推送");
+            template.convertAndSendToUser(user.getId()+"","/queue/getResponse",user);
+        }
     }
 
 }

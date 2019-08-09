@@ -8,6 +8,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
@@ -15,6 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan(basePackages = { "com.example.ldemo"})
 @EnableSwagger2
 @MapperScan("com.example.ldemo.dao")
+@EnableScheduling
 public class LdemoApplication implements ApplicationRunner {
 	private static final Logger logger = LoggerFactory.getLogger(LdemoApplication.class);
 

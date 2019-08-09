@@ -1,7 +1,9 @@
 package com.example.ldemo;
 
-import com.example.ldemo.utils.RedisClientTemplate;
+import com.example.ldemo.entity.redisMessage.GoodsMessage;
+import com.example.ldemo.entity.redisMessage.UserMessage;
 import com.example.ldemo.service.HelloService;
+import com.example.ldemo.utils.redis.Publisher;
 import com.google.common.collect.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,10 +27,10 @@ public class HelloTests {
 	private HelloService helloService;
 
 	@Autowired
-	RedisClientTemplate redisClientTemplate;
+	private JedisCluster jedisCluster;
 
 	@Autowired
-	private JedisCluster jedisCluster;
+	private Publisher publisher;
 
 	@Test
 	public void getHello() {
@@ -109,19 +111,36 @@ List alist = new ArrayList<>();
 
 
 	@Test
-	public void redisTest(){
+	public void jedisClusterTest(){
 
-		redisClientTemplate.setToRedis("redis","测试");
-		System.out.println("================="+redisClientTemplate.getRedis("redis"));
+		jedisCluster.set("redis","测试1111");
+		System.out.println("======<>>>>>>>>==========="+jedisCluster.get("redis"));
 
 	}
 
 	@Test
-	public void jedisClusterTest(){
+	public void pushMessage() {
+		UserMessage userMessage = new UserMessage();
+		userMessage.setMsgId(UUID.randomUUID().toString().replace("-",""));
+		userMessage.setUserId("1");
+		userMessage.setUsername("admin");
+		userMessage.setUsername("root");
+		userMessage.setCreateStamp(System.currentTimeMillis());
+		publisher.pushMessage("user",userMessage);
+		GoodsMessage goodsMessage = new GoodsMessage();
+		goodsMessage.setMsgId(UUID.randomUUID().toString().replace("-",""));
+		goodsMessage.setGoodsType("苹果");
+		goodsMessage.setNumber("十箱");
+		goodsMessage.setCreateStamp(System.currentTimeMillis());
+		publisher.pushMessage("goods",goodsMessage);
+	}
+	@Test
+	public void pushmapMessage() {
 
-		jedisCluster.set("redis","测试1111","","",1);
-		System.out.println("======<>>>>>>>>==========="+redisClientTemplate.getRedis("redis"));
-
+		Map map = new HashMap<>();
+		map.put("name","张三");
+		map.put("age","12");
+		publisher.pushMessage("map",map);
 	}
 
 }

@@ -3,6 +3,7 @@ package com.example.ldemo;
 import com.example.ldemo.entity.redisMessage.GoodsMessage;
 import com.example.ldemo.entity.redisMessage.UserMessage;
 import com.example.ldemo.service.HelloService;
+import com.example.ldemo.utils.RedisOperationHepler;
 import com.example.ldemo.utils.redis.Publisher;
 import com.google.common.collect.Lists;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import redis.clients.jedis.JedisCluster;
 
@@ -31,6 +33,12 @@ public class HelloTests {
 
 	@Autowired
 	private Publisher publisher;
+
+	@Autowired
+	private RedisOperationHepler redisOperationHepler;
+
+	@Autowired
+	private RedisTemplate redisTemplate;
 
 	@Test
 	public void getHello() {
@@ -114,7 +122,12 @@ List alist = new ArrayList<>();
 	public void jedisClusterTest(){
 
 		jedisCluster.set("redis","测试1111");
-		System.out.println("======<>>>>>>>>==========="+jedisCluster.get("redis"));
+		System.out.println("====================="+jedisCluster.get("redis"));
+
+
+		redisOperationHepler.set("redisOperationHepler","redisOperationHepler");
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>"+redisOperationHepler.get("redisOperationHepler"));
+
 
 	}
 

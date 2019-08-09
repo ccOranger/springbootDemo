@@ -27,7 +27,7 @@ import redis.clients.jedis.JedisPoolConfig;
 /**
  * @package: com.example.ldemo.config.redis
  * @className: ${TYPE_NAME}
- * @description: 类作用描述
+ * @description: redis集群连接配置
  * @author: 李臣臣
  * @createDate: 2019/8/9 11:36
  * @updateUser: 李臣臣

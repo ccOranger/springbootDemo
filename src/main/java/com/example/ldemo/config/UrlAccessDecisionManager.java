@@ -13,7 +13,17 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * Created by sang on 2017/12/28.
+ * @package:        com.example.ldemo.config
+ * @className:      UrlAccessDecisionManager
+ * @description:    类作用描述
+ * @author:         李臣臣
+ * @createDate:     2019/8/20 17:10
+ * @updateUser:     李臣臣
+ * @updateDate:     2019/8/20 17:10
+ * @updateRemark:   The modified content
+ * @version:        1.0
+ * <p>copyright: Copyright (c) 2019/8/20</p>
+ *
  */
 @Component
 public class UrlAccessDecisionManager implements AccessDecisionManager {
@@ -27,8 +37,10 @@ public class UrlAccessDecisionManager implements AccessDecisionManager {
             if ("ROLE_LOGIN".equals(needRole)) {
                 if (auth instanceof AnonymousAuthenticationToken) {
                     throw new BadCredentialsException("未登录");
-                } else
+                } else {
+                    //一些接口，登录即可访问
                     return;
+                }
             }
             //当前用户所具有的权限
             Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();

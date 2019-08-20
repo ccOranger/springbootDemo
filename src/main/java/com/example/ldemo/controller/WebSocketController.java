@@ -39,7 +39,7 @@ public class WebSocketController {
     //广播推送消息
     @Scheduled(fixedRate = 10000)
     public void sendTopicMessage() {
-        System.out.println("后台广播推送！");
+     //   System.out.println("后台广播推送！");
         template.convertAndSend("/topic/greetings", "掌声");
         for (int i=1;i<4;i++){
             template.convertAndSend("/topic/greetings", "后台广播推送"+i);
@@ -49,7 +49,7 @@ public class WebSocketController {
     //一对一推送消息
     @Scheduled(fixedRate = 10000)
     public void sendQueueMessage() {
-        System.out.println("后台一对一推送！");
+      //  System.out.println("后台一对一推送！");
         for (int i=1;i<4;i++){
             User user=new User();
             user.setId((long) i);

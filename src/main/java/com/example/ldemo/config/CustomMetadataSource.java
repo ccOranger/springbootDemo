@@ -1,9 +1,5 @@
 package com.example.ldemo.config;
 
-import org.sang.bean.Menu;
-import org.sang.bean.Role;
-import org.sang.service.MenuService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -12,20 +8,27 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
- * Created by sang on 2017/12/28.
+ * @package:        com.example.ldemo.config
+ * @className:      CustomMetadataSource
+ * @description:    判断菜单
+ * @author:         李臣臣
+ * @createDate:     2019/8/20 17:10
+ * @updateUser:     李臣臣
+ * @updateDate:     2019/8/20 17:10
+ * @updateRemark:   The modified content
+ * @version:        1.0
+ * <p>copyright: Copyright (c) 2019/8/20</p>
+ *
  */
 @Component
 public class CustomMetadataSource implements FilterInvocationSecurityMetadataSource {
-    @Autowired
-    MenuService menuService;
     AntPathMatcher antPathMatcher = new AntPathMatcher();
     @Override
     public Collection<ConfigAttribute> getAttributes(Object o) {
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
-        List<Menu> allMenu = menuService.getAllMenu();
+        /*List<Menu> allMenu = menuService.getAllMenu();
         for (Menu menu : allMenu) {
             if (antPathMatcher.match(menu.getUrl(), requestUrl)
                     &&menu.getRoles().size()>0) {
@@ -37,7 +40,7 @@ public class CustomMetadataSource implements FilterInvocationSecurityMetadataSou
                 }
                 return SecurityConfig.createList(values);
             }
-        }
+        }*/
         //没有匹配上的资源，都是登录访问
         return SecurityConfig.createList("ROLE_LOGIN");
     }

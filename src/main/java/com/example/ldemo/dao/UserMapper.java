@@ -11,6 +11,8 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Long id);
 
+    User loadUserByUsername(String userName);
+
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);

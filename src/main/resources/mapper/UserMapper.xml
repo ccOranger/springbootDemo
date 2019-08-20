@@ -9,6 +9,11 @@
     <result column="reg_time" jdbcType="VARCHAR" property="regTime" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
   </resultMap>
+  <resultMap id="lazyLoadRoles" type="com.example.ldemo.entity.User" extends="BaseResultMap">
+    <collection property="roles" ofType="com.example.ldemo.entity.Role" select="com.example.ldemo.dao.UserMapper.getRolesByHrId"
+                column="id"></collection>
+  </resultMap>
+
   <sql id="Base_Column_List">
     id, email, nick_name, pass_word, reg_time, user_name
   </sql>
@@ -103,5 +108,15 @@
       user_name = #{userName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  
+  <select id="loadUserByUsername" parameterType="java.lang.String" resultMap="lazyLoadRoles" >
+    
+      select * from user  WHERE  user_name = #{userName};
+    
+  </select>
+  <select id="getRolesByHrId" resultType="com.example.ldemo.entity.Role">
+        select  r.* from role r INNER  JOIN  user_role ur on r.id = ur.rid WHERE  ur.uid = #{id};
+    </select>
 
 </mapper>

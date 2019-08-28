@@ -71,7 +71,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/index.html", "/static/**", "/login_p", "/favicon.ico");
+        web.ignoring().antMatchers("/doc.html","/index.html", "/static/**", "/login_p", "/favicon.ico");
+        web.ignoring().antMatchers("/swagger-ui.html")
+                .antMatchers("/swagger-resources/**")
+                .antMatchers("/v2/api-docs");
+
+
     }
 
 

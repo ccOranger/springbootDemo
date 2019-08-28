@@ -1,5 +1,8 @@
 server:
-   port: 8099
+   port: 8881
+   servlet:
+      session:
+        timeout: 6000
 
 hello:
   name: 你好

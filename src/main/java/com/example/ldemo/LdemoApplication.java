@@ -7,16 +7,18 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
-@SpringBootApplication
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })//禁用Security
 @ComponentScan(basePackages = { "com.example.ldemo"})
 @EnableSwagger2
 @MapperScan("com.example.ldemo.dao")
 @EnableScheduling
+@EnableAsync
 public class LdemoApplication implements ApplicationRunner {
 	private static final Logger logger = LoggerFactory.getLogger(LdemoApplication.class);
 

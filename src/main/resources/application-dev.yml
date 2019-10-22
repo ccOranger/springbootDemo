@@ -1,5 +1,5 @@
 server:
-   port: 8881
+   port: 8886
    servlet:
       session:
         timeout: 6000
@@ -86,3 +86,9 @@ task:
       maxPoolSize: 40
       keepAliveSeconds: 300
       queueCapacity: 50
+
+
+baidu:
+  appId: 17377209
+  apiKey: dtckzGYLtDPlbXm2Mq5AsXTs
+  secretKey: ABGHTrpAopULO79GuLft4QKoOrbdUe3i

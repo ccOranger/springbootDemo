@@ -11,7 +11,7 @@
     <appenders>
 
         <Console name="Console" target="SYSTEM_OUT">
-            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${PATTERN}"/>
         </Console>
 
@@ -77,7 +77,7 @@
         <logger name="springfox.documentation" level="WARN" />
         <logger name="org.apache.ibatis.io.ResolverUtil" level="WARN" />
 
-        <asyncRoot level="debug">
+        <asyncRoot level="error">
             <!-- 控制台 -->
             <appender-ref ref="Console" />
             <appender-ref ref="ErrorRollingFile" />

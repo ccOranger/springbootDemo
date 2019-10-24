@@ -74,10 +74,11 @@ mybatis:
 
 # 打印日志
 logging:
+#控制台日志输出级别,这里设置的级别，控制xml文件中console控制台的输出，不设置默认info
   level:
-     com.example.ldemo: trace
-  config:
-    classpath: log4j2-dev.xml
+     com.rayeye.mybatisplus: trace
+#配置日志输出
+  config: classpath:log4j2-dev.xml
 
 # 线程池配置
 task:

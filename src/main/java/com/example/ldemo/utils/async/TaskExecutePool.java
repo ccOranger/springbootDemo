@@ -1,9 +1,9 @@
-package com.example.ldemo.utils;
+package com.example.ldemo.utils.async;
 
 /**
  * @package: com.example.ldemo.utils
  * @className: ${TYPE_NAME}
- * @description: 创建线程池
+ * @description: 自定义创建线程池
  * @author: 李臣臣
  * @createDate: 2019/4/16 17:35
  * @updateUser: 李臣臣
@@ -49,7 +49,6 @@ public class TaskExecutePool {
         executor.initialize();
         return executor;
     }
-
 
 
 }

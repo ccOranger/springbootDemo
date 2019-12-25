@@ -11,9 +11,9 @@
     <appenders>
 
         <Console name="Console" target="SYSTEM_OUT">
-            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="${PATTERN}"/>
-        </Console>
+        <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+        <PatternLayout pattern="${PATTERN}"/>
+    </Console>
 
         <RollingFile name="ErrorRollingFile" fileName="${LOG_HOME}/error.log"
                      filePattern="${LOG_HOME}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log.gz">

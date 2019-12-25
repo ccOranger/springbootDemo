@@ -18,7 +18,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @MapperScan("com.example.ldemo.dao")
 @EnableScheduling
-@EnableAsync
 public class LdemoApplication implements ApplicationRunner {
 	private static final Logger logger = LoggerFactory.getLogger(LdemoApplication.class);
 

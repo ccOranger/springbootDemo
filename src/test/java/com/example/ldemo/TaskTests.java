@@ -6,6 +6,7 @@ import com.example.ldemo.utils.AsyncTask;
 import com.example.ldemo.utils.Baidu;
 import com.example.ldemo.utils.HttpClient;
 import com.example.ldemo.utils.HttpUtils;
+import com.example.ldemo.utils.async.AsyncException;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
@@ -28,6 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * @package: com.example.ldemo
@@ -49,24 +51,51 @@ public class TaskTests {
     private AsyncTask asyncTask;
 
     @Test
-    public void AsyncTaskTest() throws InterruptedException, ExecutionException {
+    public void AsyncTaskTest1() throws Exception {
 
-        for (int i = 0; i < 100; i++) {
 
            // logger.debug(i+"aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            asyncTask.doTask2(i);
+
+            asyncTask.doTask2(1);
+        // asyncTask.doTask2(1);
+        try {
+            logger.info("begin to deal other Task!");
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
+
         logger.info("All tasks finished.");
     }
 
+    /**
+    * @Description 测试类用isCancelled判断异步任务是否取消，isDone判断任务是否执行结束
+    * @Author  李臣臣
+    * @Date   2019/12/25 0025 13:35
+    * @Param
+    * @Return
+    * @Exception
+    *
+    */
+    @Test
+    public void testDealHaveReturnTask() throws Exception {
 
-    @Async  //myTaskAsynPool即配置线程池的方法名，此处如果不写自定义线程池的方法名，会使用默认的线程池
-    public void doTask1(int i) throws InterruptedException{
-        logger.info("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-    }
-    @Async  //myTaskAsynPool即配置线程池的方法名，此处如果不写自定义线程池的方法名，会使用默认的线程池
-    public void doTask2(int i) throws InterruptedException{
-        logger.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        Future<String> future = asyncTask.dealHaveReturnTask();
+        logger.info("begin to deal other Task!");
+        while (true) {
+            if(future.isCancelled()){
+                logger.info("deal async task is Cancelled");
+                break;
+            }
+            if (future.isDone() ) {
+                logger.info("deal async task is Done");
+                logger.info("return result is " + future.get());
+                break;
+            }
+            logger.info("wait async task to end ...");
+            Thread.sleep(1000);
+        }
     }
 
     @Test

@@ -1,4 +1,4 @@
-package com.example.ldemo.utils;
+package com.example.ldemo.utils.async;
 
 import com.example.ldemo.entity.TaskThreadPoolConfig;
 import org.slf4j.Logger;
@@ -32,6 +32,22 @@ public class NativeAsyncTaskExecutePool implements  AsyncConfigurer {
     @Autowired
     TaskThreadPoolConfig config;
 
+
+    //我们可以实现AsyncConfigurer接口，也可以继承AsyncConfigurerSupport类来实现
+    //在方法getAsyncExecutor()中创建线程池的时候，必须使用 executor.initialize()，
+    //不然在调用时会报线程池未初始化的异常。
+    //如果使用threadPoolTaskExecutor()来定义bean，则不需要初始化
+
+    //    @Bean
+//    public ThreadPoolTaskExecutor threadPoolTaskExecutor(){
+//        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+//        executor.setCorePoolSize(10);
+//        executor.setMaxPoolSize(100);
+//        executor.setQueueCapacity(100);
+//        return executor;
+//    }
+
+
     @Override
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
@@ -58,6 +74,7 @@ public class NativeAsyncTaskExecutePool implements  AsyncConfigurer {
      *  异步任务中异常处理
      * @return
      */
+/*
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return new AsyncUncaughtExceptionHandler() {
@@ -69,4 +86,15 @@ public class NativeAsyncTaskExecutePool implements  AsyncConfigurer {
             }
         };
     }
+*/
+
+    /**
+     *  异步任务中异常处理
+     * @return
+     */
+    @Override
+    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+        return new AsyncExceptionHandler();
+    }
+
 }

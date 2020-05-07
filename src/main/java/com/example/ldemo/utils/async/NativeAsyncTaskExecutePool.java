@@ -32,7 +32,6 @@ public class NativeAsyncTaskExecutePool implements  AsyncConfigurer {
     @Autowired
     TaskThreadPoolConfig config;
 
-
     //我们可以实现AsyncConfigurer接口，也可以继承AsyncConfigurerSupport类来实现
     //在方法getAsyncExecutor()中创建线程池的时候，必须使用 executor.initialize()，
     //不然在调用时会报线程池未初始化的异常。
@@ -61,7 +60,6 @@ public class NativeAsyncTaskExecutePool implements  AsyncConfigurer {
         executor.setKeepAliveSeconds(config.getKeepAliveSeconds());
         //线程名字前缀
         executor.setThreadNamePrefix("NativeAsyncExecutor-");
-
         // setRejectedExecutionHandler：当pool已经达到max size的时候，如何处理新任务
         // CallerRunsPolicy：不在新线程中执行任务，而是由调用者所在的线程来执行
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());

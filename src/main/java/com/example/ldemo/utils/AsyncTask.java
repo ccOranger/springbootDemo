@@ -61,12 +61,12 @@ public class AsyncTask {
 
 
         //异常处理测试
-        try{
+        /*try{
             String s = null;
             s.equals("111");
         }catch (Exception e){
                 throw  new AsyncException(300,"异常");
-        }
+        }*/
 
 
         logger.info("Thread {} deal No Return Task end at {}", Thread.currentThread().getName(), System.currentTimeMillis());

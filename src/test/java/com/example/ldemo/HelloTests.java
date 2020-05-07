@@ -17,8 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import redis.clients.jedis.JedisCluster;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.*;
 import java.util.function.Predicate;
 
 @RunWith(SpringRunner.class)
@@ -50,11 +49,15 @@ public class HelloTests {
 		Map map = new HashMap<>();
 
 		map.put("1",1);
+		map.put(null,111);
+		map.put("2222",null);
 
 		Map map1 =  new ConcurrentHashMap<>();
 		map1.put("1",1);
+		map1.get("1");
 
 		Map map2 = new Hashtable<>();
+
 
 		Set set = new HashSet<>();
 
@@ -97,6 +100,7 @@ List alist = new ArrayList<>();
 
 		List<String> list = new ArrayList<>();
 		List<String> listq = new ArrayList<>();
+		list.add("12312");
 		list.add("12312");
 		list.add("12311312312");
 
@@ -156,4 +160,41 @@ List alist = new ArrayList<>();
 		publisher.pushMessage("map",map);
 	}
 
+
+	@Test
+	public void  tt(){
+
+		ExecutorService newExecutorService = Executors.newFixedThreadPool(3);
+		ExecutorService newExecutorService1 = Executors.newScheduledThreadPool(1);
+		ExecutorService newExecutorService2 = Executors.newCachedThreadPool();
+		ExecutorService newExecutorService3 = Executors.newSingleThreadExecutor();
+	}
+
+
+
+	@Test
+	public void redisTest(){
+
+		for (int i=0;i<10;i++){
+			try {
+				Thread.sleep(2000);
+				if (tryLock("111","2222")){
+					System.out.println("TTTTTTTTTTTTTTTTTTTTT");
+				}else {
+					System.out.println("fffffffffffffffffffffffffffff");
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+
+
+	//分布式锁
+	public boolean tryLock(String key,String value){
+
+			return redisTemplate.opsForValue().setIfAbsent(key,value,10, TimeUnit.SECONDS);
+}
 }

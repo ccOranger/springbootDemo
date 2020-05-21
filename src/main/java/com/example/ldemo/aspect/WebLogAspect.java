@@ -60,7 +60,7 @@ public class WebLogAspect {
     ThreadLocal<Long> startTime = new ThreadLocal<>();
 
 
-    @Pointcut("execution(public * com.example.ldemo.service..*.*(..))")
+    @Pointcut("execution(public * com.example.ldemo.controller..*.*(..))")
     public void webLog(){}
 
     @Before("webLog()")
@@ -71,6 +71,7 @@ public class WebLogAspect {
 
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (attributes != null){
         HttpServletRequest request = attributes.getRequest();
 
         // 记录下请求内容
@@ -80,6 +81,7 @@ public class WebLogAspect {
         logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
         logger.info("ARGS : " + Arrays.toString(joinPoint.getArgs()));
 
+    }
     }
 
     @AfterReturning(returning = "ret", pointcut = "webLog()")

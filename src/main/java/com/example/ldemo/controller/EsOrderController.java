@@ -53,6 +53,7 @@ public class EsOrderController {
       qb.should(QueryBuilders.matchQuery("username", search));
         qb.should(QueryBuilders.matchQuery("password", search));
 
+        //分页从0开始的
         Pageable pageable = PageRequest.of(page, limit);
 
         return (Page<EsOrder>)esOrderMapper.search(qb,pageable);

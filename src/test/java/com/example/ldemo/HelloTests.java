@@ -163,7 +163,6 @@ List alist = new ArrayList<>();
 
 	@Test
 	public void  tt(){
-
 		ExecutorService newExecutorService = Executors.newFixedThreadPool(3);
 		ExecutorService newExecutorService1 = Executors.newScheduledThreadPool(1);
 		ExecutorService newExecutorService2 = Executors.newCachedThreadPool();
@@ -195,6 +194,6 @@ List alist = new ArrayList<>();
 	//分布式锁
 	public boolean tryLock(String key,String value){
 
-			return redisTemplate.opsForValue().setIfAbsent(key,value,10, TimeUnit.SECONDS);
+		return redisTemplate.opsForValue().setIfAbsent(key,value,10, TimeUnit.SECONDS);
 }
 }

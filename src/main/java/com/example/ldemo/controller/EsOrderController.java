@@ -9,12 +9,14 @@ import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.WildcardQueryBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +52,7 @@ public class EsOrderController {
 
         //should --- 对多个字段都匹配，只要有一个字段匹配成功就可以   must --- 全部字段都匹配成功才可以
       //qb.must(QueryBuilders.matchQuery("username", search));
-      qb.should(QueryBuilders.matchQuery("username", search));
+        qb.should(QueryBuilders.matchQuery("username", search));
         qb.should(QueryBuilders.matchQuery("password", search));
 
         //分页从0开始的

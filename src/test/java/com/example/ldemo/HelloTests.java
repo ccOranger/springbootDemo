@@ -196,4 +196,36 @@ List alist = new ArrayList<>();
 
 		return redisTemplate.opsForValue().setIfAbsent(key,value,10, TimeUnit.SECONDS);
 }
+
+
+	//分布式锁2.0
+	public String deductStock() {
+		// 给每一把锁分配不同的值
+		String clientId = UUID.randomUUID().toString();
+		try {
+			// 获得锁
+			Boolean result = redisTemplate.opsForValue().setIfAbsent("lockKey", clientId, 10, TimeUnit.SECONDS);
+			// 业务代码
+			if (!result) {
+				return "error";
+			}
+			int stock = Integer.parseInt(redisTemplate.opsForValue().get("stock").toString());
+			if (stock > 0) {
+				int realStock = stock - 1;
+				redisTemplate.opsForValue().set("stock", realStock + "");
+				System.out.println("扣减成功，剩余库存：" + redisTemplate.opsForValue().get("stock"));
+			} else {
+				System.out.println("扣减失败，库存不足");
+			}
+		} finally {
+			//因为我们设置锁的时间是 10 s，如果业务执行之间大于 10 s，锁就会失效，第二个线程会获得锁，这是为了防止第一个线程执行结束的时候误删第二个线程的锁，就需要在删除的时候进行判断，我们给每一把锁设置一个 UUID 的值，这样可以做到在删除的时候判断是否是自己的锁。
+			// 释放锁
+			if (clientId.equals(redisTemplate.opsForValue().get("lockKey"))) {
+				redisTemplate.delete("lockKey");
+			}
+		}
+		return "success";
+	}
+
+
 }

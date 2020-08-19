@@ -15,7 +15,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import redis.clients.jedis.JedisCluster;
+import sun.misc.BASE64Encoder;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Predicate;
@@ -227,5 +231,30 @@ List alist = new ArrayList<>();
 		return "success";
 	}
 
+
+
+
+	/* 图片转base64字符串
+	 * @param imgFile 图片路径
+	 * @return base64字符串格式的图片
+	 */
+	@Test
+	public void  imageToBase64Str() {
+
+		String imgFile = "C:\\Users\\Administrator\\Desktop\\ea7feecf07585dcee2feafe137a4e14.png";
+		InputStream inputStream = null;
+		byte[] data = null;
+		try {
+			inputStream = new FileInputStream(imgFile);
+			data = new byte[inputStream.available()];  //根据文件流字节大小初始化data字节数组大小
+			inputStream.read(data);  //将流读入data
+			inputStream.close();  //关闭流
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//将图片数组加密
+		BASE64Encoder encoder = new BASE64Encoder();
+		System.out.println("dada====="+ encoder.encode(data));
+	}
 
 }

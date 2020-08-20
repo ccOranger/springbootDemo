@@ -1,0 +1,76 @@
+server:
+   port: 8887
+   servlet:
+      session:
+        timeout: 6000
+
+hello:
+  name: 你好
+
+
+# swagger开关
+swagger:
+  enabled:  true
+  info:
+    basePackage: com.example.ldemo.controller
+    title: 发布控制服务
+    desc: 发布控制服务
+    termsOfServiceUrl: http://127.0.0.1:${server.port}/
+    version: 1.0
+    contact:
+        name: 发布控制服务
+        url: http://127.0.0.1:${server.port}/swagger-ui.html
+        email:
+
+
+# JDBC 配置(驱动类自动从url的mysql识别,数据源类型自动识别)
+spring:
+    datasource:
+        druid:
+            url: jdbc:mysql://47.101.11.64:33310/db_pet?useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT
+            username: root
+            password: 123456
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            initial-size: 1
+            max-active: 20
+            min-idle: 1
+            max-wait: 60000
+            pool-prepared-statements: false
+            max-pool-prepared-statement-per-connection-size: 20
+            validation-query: SELECT 'x'
+            test-on-borrow: false
+            test-on-return: false
+            test-while-idle: true
+            time-between-eviction-runs-millis: 60000
+            min-evictable-idle-time-millis: 300000
+            filters: stat
+            web-stat-filter:
+                enabled: true
+                url-pattern: /*
+                exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+                session-stat-enable: false
+                session-stat-max-count: 1000
+                principal-session-name: admin
+                principal-cookie-name: admin
+                profile-enable: true
+            stat-view-servlet:
+                enabled: true
+                url-pattern: /druid/*
+                reset-enable: true
+                login-username: admin
+                login-password: admin
+                allow:
+                deny:
+            aop-patterns: com.example.ldemo.service.*
+
+
+mybatis:
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml
+
+# 打印日志
+logging:
+#控制台日志输出级别,这里设置的级别，控制xml文件中console控制台的输出，不设置默认info
+  level:
+     com.example.ldemo2: trace
+#配置日志输出
+  config: classpath:log4j2-dev.xml

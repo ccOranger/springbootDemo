@@ -5,9 +5,15 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @package: com.example.ldemo.controller
@@ -41,5 +47,45 @@ public class HelloController {
     @GetMapping(value = "/getAop")
     public String getAop(){
         return  "aop测试";
+    }
+
+
+
+
+
+    @ApiOperation(value = "上传图片")
+    @PostMapping("/upload")
+    public void upload(@RequestParam("files") MultipartFile[] files) throws Exception {
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            if(files != null && files.length > 0) {
+                //循环获取file数组中得文件
+                for (int i = 0; i < files.length; i++) {
+                    MultipartFile file = files[i];
+                    //保存文件
+                    if (!file.isEmpty()) {
+                        is = file.getInputStream();
+                        String path = "E:/workspace/Project/Platform/Web-iot-FE/bill/file/" + Long.toString(System.currentTimeMillis() / 1000)+file.getOriginalFilename();
+                        os = new FileOutputStream(path);
+                        int bytesRead = 0;
+                        byte[] buffer = new byte[8192];
+                        while ((bytesRead = is.read(buffer, 0, 8192)) != -1) {
+                            os.write(buffer, 0, bytesRead);
+                        }
+                    }
+                }
+            }else{
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if(os != null){
+                os.close();
+            }
+            if(is != null){
+                is.close();
+            }
+        }
     }
 }

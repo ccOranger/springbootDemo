@@ -109,4 +109,31 @@ public class WebSocketServer {
         onlineNum.decrementAndGet();
     }
 
+
+    /**
+     *  nginx 配置
+     * 		location /yg/webSocket/ {
+     * 		proxy_pass http://127.0.0.1:8208/webSocket/;
+     * 		proxy_set_header Upgrade $http_upgrade;
+     * 		proxy_set_header Connection "upgrade";
+     * 		proxy_set_header X-real-ip $remote_addr;
+     * 		#proxy_set_header X-Forwarded-For $remote_addr;
+     * 		#proxy_connect_timeout 60;
+     * 		#proxy_read_timeout 90;
+     * 		proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
+     * 		proxy_ignore_headers Set-Cookie;
+     * 		proxy_hide_header Set-Cookie;
+     * 		proxy_hide_header X-powered-by;
+     * 		proxy_set_header X-Real-IP $remote_addr;
+     * 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+     * 		proxy_set_header X-Forwarded-Proto https;
+     * 		proxy_set_header Host $http_host;
+     * 		#配置websocket 需要加下面这个
+     * 		proxy_http_version 1.1;
+     * 		proxy_connect_timeout 60;
+     *         proxy_read_timeout 3600;
+     *         proxy_send_timeout 60;
+     *        }
+     *
+     */
 }

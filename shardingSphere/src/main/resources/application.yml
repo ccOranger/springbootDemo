@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: demo
+  profiles:
+    active: dev
+
+
+#开启驼峰匹配
+mybatis:
+    configuration:
+        map-underscore-to-camel-case: true
+

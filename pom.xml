@@ -6,6 +6,7 @@
 	<modules>
 		<module>demo2</module>
 		<module>demo1</module>
+		<module>shardingSphere</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -167,8 +168,6 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.8</version>
 		</dependency>
-
-
 	</dependencies>
 
 	<build>

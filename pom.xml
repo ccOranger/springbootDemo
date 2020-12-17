@@ -6,6 +6,8 @@
 	<modules>
 		<module>demo2</module>
 		<module>demo1</module>
+		<module>demo-valid</module>
+		<module>demo-common</module>
 		<module>shardingSphere</module>
 	</modules>
 	<parent>

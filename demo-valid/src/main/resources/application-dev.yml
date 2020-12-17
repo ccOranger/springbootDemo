@@ -1,0 +1,24 @@
+server:
+   port: 8886
+   servlet:
+      session:
+        timeout: 6000
+
+hello:
+  name: 你好
+
+
+# swagger开关
+swagger:
+  enabled:  true
+  info:
+    basePackage: com.demo.valid.controller
+    title: 发布控制服务
+    desc: 发布控制服务
+    termsOfServiceUrl: http://127.0.0.1:${server.port}/
+    version: 1.0
+    contact:
+        name: 发布控制服务
+        url: http://127.0.0.1:${server.port}/swagger-ui.html
+        email:
+

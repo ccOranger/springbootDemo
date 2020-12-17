@@ -1,7 +1,7 @@
 package com.example.ldemo.entity;
 
 /**
- * @package: cn.rayeye.micro.smoke.domain.vo
+ * @package: cn.demo.micro.smoke.domain.vo
  * @className: ${TYPE_NAME}
  * @description: 类作用描述
  * @author: 李臣臣

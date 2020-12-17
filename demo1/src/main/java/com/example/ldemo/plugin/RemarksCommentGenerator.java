@@ -33,7 +33,7 @@ public class RemarksCommentGenerator extends DefaultCommentGenerator {
         topLevelClass.addJavaDocLine("/**");
         topLevelClass.addJavaDocLine(" * 实体名称 "+introspectedTable.getFullyQualifiedTable());
         topLevelClass.addJavaDocLine(" * @projectName: iot-platform");
-        topLevelClass.addJavaDocLine(" * @package: com.rayeye.iot.persist.vo");
+        topLevelClass.addJavaDocLine(" * @package: com.demo.iot.persist.vo");
         topLevelClass.addJavaDocLine(" * @className: ${TYPE_NAME}");
         topLevelClass.addJavaDocLine(" * @description: Describes the function of the class");
         topLevelClass.addJavaDocLine(" * @author: 李臣臣");

@@ -13,7 +13,7 @@ import java.util.Arrays;
 /**
  * 跨域设置
  * @projectName:
- * @package:        cn.rayeye.micro.smoke.config
+ * @package:        cn.demo.micro.smoke.config
  * @ClassName:      SecurityCorsConfiguration
  * @description:    跨域设置
  * @author:         Neil.Zhou

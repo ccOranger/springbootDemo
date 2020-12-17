@@ -3,7 +3,7 @@ package com.example.ldemo.entity;
 /**
  * 实体名称 build
  * @projectName: iot-platform
- * @package: com.rayeye.iot.persist.vo
+ * @package: com.demo.iot.persist.vo
  * @className: ${TYPE_NAME}
  * @description: Describes the function of the class
  * @author: 李臣臣

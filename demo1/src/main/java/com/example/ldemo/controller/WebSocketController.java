@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * @package: cn.rayeye.micro.smoke.controller
+ * @package: cn.demo.micro.smoke.controller
  * @className: ${TYPE_NAME}
  * @description: 类作用描述
  * @author: 李臣臣

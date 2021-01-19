@@ -10,6 +10,7 @@
 		<module>demo-common</module>
 		<module>shardingSphere</module>
         <module>es-demo</module>
+        <module>demo-rabbitmq</module>
     </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

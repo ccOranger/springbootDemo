@@ -24,7 +24,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Predicate;
 
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 @SpringBootTest
 public class HelloTests {
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -70,6 +70,10 @@ public class HelloTests {
 
 		CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList(new ArrayList<>());
 		List<String> list= Collections.synchronizedList(Lists.newArrayList());
+
+
+		//List<String> list = Collections.synchronizedList(new LinkedList<String>());
+		//将LinkedList全部换成ConcurrentLinkedQueue
 List alist = new ArrayList<>();
 		List llist = new LinkedList<>();
 

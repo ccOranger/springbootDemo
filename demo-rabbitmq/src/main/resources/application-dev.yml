@@ -1,0 +1,63 @@
+server:
+   port: 8886
+   servlet:
+      session:
+        timeout: 6000
+
+hello:
+  name: 你好
+
+
+# swagger开关
+swagger:
+  enabled:  true
+  info:
+    basePackage: com.example.rabbitmq.controller
+    title: 发布控制服务
+    desc: 发布控制服务
+    termsOfServiceUrl: http://127.0.0.1:${server.port}/
+    version: 1.0
+    contact:
+        name: 发布控制服务
+        url: http://127.0.0.1:${server.port}/swagger-ui.html
+        email:
+
+# JDBC 配置(驱动类自动从url的mysql识别,数据源类型自动识别)
+spring:
+  rabbitmq:
+    host: 47.101.11.64
+    port: 5672
+    username: admin
+    password: admin
+    # 开启returnedMessage回调 Exchange -> Queue
+    publisher-returns: true # 实现ReturnCallback接口，如果消息从交换器发送到对应队列失败时触发
+    publisher-confirm-type: correlated
+    listener:
+      type: simple
+      simple:
+        # 设置手动确认(ack) Queue -> C
+        acknowledge-mode: manual # 消息消费确认，可以手动确认
+        prefetch: 1 # 消费者每次从队列获取的消息数量
+        concurrency: 5 # 消费者数量---峰值
+        max-concurrency: 10 # 启动消费者最大数量
+        # 重试策略相关配置
+        retry:
+          enabled: true #开启消费者重试
+          max-attempts: 3 #最大重试次数
+          initial-interval: 2000 #重试间隔时间
+    template:
+      #在消息没有被路由到合适队列情况下会将消息返还给消息发布者
+      #当mandatory标志位设置为true时，如果exchange根据自身类型和消息routingKey无法找到一个合适的queue存储消息，
+      # 那么broker会调用basic.return方法将消息返还给生产者;当mandatory设置为false时，
+      # 出现上述情况broker会直接将消息丢弃;通俗的讲，mandatory标志告诉broker代理服务器至少将消息route到一个队列中，
+      # 否则就将消息return给发送者;
+      #: true # 启用强制信息
+      mandatory: true
+
+# 打印日志
+logging:
+#控制台日志输出级别,这里设置的级别，控制xml文件中console控制台的输出，不设置默认info
+  level:
+     com.licc.rabbitmq: trace
+#配置日志输出
+  config: classpath:log4j2-dev.xml

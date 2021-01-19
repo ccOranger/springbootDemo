@@ -65,6 +65,12 @@
 
 
 
+        <!-- mybatis 逆向工程 -->
+                <dependency>
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-core</artifactId>
+                    <version>${mybatis-generator.version}</version>
+                </dependency>
 
         <dependency>
             <groupId>com.baidu.aip</groupId>

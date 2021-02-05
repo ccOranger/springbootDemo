@@ -19,21 +19,11 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Data
 @TypeAlias("human")
 @Document(indexName = "person")
-public class Person implements Persistable<String> {
+public class Person  {
 
     @Id
     private String  id;
     private String username;
     private String password;
     private int age;
-
-    @Override
-    public String getId() {
-        return null;
-    }
-
-    @Override
-    public boolean isNew() {
-        return false;
-    }
 }
